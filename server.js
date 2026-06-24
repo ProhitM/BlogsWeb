@@ -6,6 +6,7 @@ const UserRoute = require('./Routes/user')
 const mongoose = require('mongoose')
 const cookieparser = require('cookie-parser')
 const { checkAuthenticationCookieToken } = require("./middleware/authentication")
+const {connectCloudinary} = require("./config/cloudinary")
 
 
 
@@ -20,6 +21,9 @@ app.set('views', path.resolve('./views'))
 
 // db connections 
 mongoose.connect(process.env.MONGO_URL).then(()=>{console.log('db is connected')})
+
+// clodinary connection 
+connectCloudinary()
 
 // middleware 
 app.use(express.urlencoded({extended:false}))
